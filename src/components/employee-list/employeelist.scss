@@ -1,0 +1,90 @@
+@import '../../styles/variables';
+
+.employee_list_wrapper {
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+
+	.no_employee {
+		display: grid;
+		place-items: center;
+		width: 100%;
+		height: 100%;
+
+		img {
+			width: 260px;
+			height: 260px;
+			object-fit: contain;
+			margin: auto;
+			transform: translateY(-15%);
+		}
+	}
+
+	.employee_list {
+		display: flex;
+		flex-direction: column;
+
+		.employee_list_header {
+			background-color: $border-color;
+			color: $bg-primary;
+			padding: 1rem;
+
+			.list_header_title {
+				font-size: 16px;
+				font-weight: 500;
+				line-height: 1.25rem;
+			}
+		}
+	}
+}
+
+.employee_swipe {
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	height: 105px;
+
+	.single_employee {
+		position: absolute;
+		inset: 0;
+		z-index: 10;
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		border-bottom: 1px solid $input-border-color;
+		background-color: white;
+
+		.employee_name {
+			font-size: 1rem;
+			font-weight: 500;
+		}
+		.employee_role {
+			font-size: 14px;
+			color: $input-placeholder-color;
+		}
+		.employee_date {
+			font-size: 12px;
+			color: $input-placeholder-color;
+		}
+	}
+
+	.swipe-to-delete {
+		transition: transform 0.3s ease-in-out;
+		overflow: hidden;
+
+		&.swiping {
+			transform: translateX(-10px);
+		}
+	}
+
+	.delete-icon {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		padding: 10px;
+		background-color: #f34642; /* You can customize the background color */
+		color: white;
+		cursor: pointer;
+	}
+}
