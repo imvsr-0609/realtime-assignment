@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react';
 import { Formik, FormikHelpers, Form } from 'formik';
-import { Employee } from '../employees/Employees.hooks';
-import EmployeeForm from '../../forms/EmployeeForm/EmployeeForm';
-import { EmployeeFormType } from '../../forms/EmployeeForm/types';
-import { useIndexedDB } from '../../helpers/useIndexedDB';
+import { Employee } from '../Employees.hooks';
+import EmployeeForm from '../../../forms/EmployeeForm/EmployeeForm';
+import { EmployeeFormType } from '../../../forms/EmployeeForm/types';
+import { useIndexedDB } from '../../../helpers/useIndexedDB';
 import SwipeWrapper from './SwipeWrapper';
-import { getInitialValue } from '../../forms/EmployeeForm/initialValue';
-import { EmployeeFormSchema } from '../../forms/EmployeeForm/validation';
+import { getInitialValue } from '../../../forms/EmployeeForm/initialValue';
+import { EmployeeFormSchema } from '../../../forms/EmployeeForm/validation';
 import { Drawer } from '@mui/material';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
@@ -25,10 +25,10 @@ const SingleEmployee: FC<SingleEmployeeProps> = ({ employeeData }) => {
 	const { name, role, dateFrom, dateTo } = employeeData;
 
 	const handleEditEmployee = (values: EmployeeFormType) => {
-		updateEmployee(values.id, values);
+		updateEmployee(values);
 	};
 
-	const handleDeleteEmployee = (key: number) => {
+	const handleDeleteEmployee = (key: string) => {
 		deleteEmployee(key);
 	};
 
@@ -63,11 +63,7 @@ const SingleEmployee: FC<SingleEmployeeProps> = ({ employeeData }) => {
 					validationSchema={EmployeeFormSchema}
 				>
 					<Form>
-						<EmployeeForm
-							value={employeeData}
-							onSubmit={handleEditEmployee}
-							close={() => setShowForm(false)}
-						/>
+						<EmployeeForm close={() => setShowForm(false)} />
 					</Form>
 				</Formik>
 			</Drawer>
@@ -80,7 +76,7 @@ const SingleEmployee: FC<SingleEmployeeProps> = ({ employeeData }) => {
 						<p className="employee_date">
 							{dateTo === '' && 'From '}
 							{dayjs(dateFrom).format('ll')}
-							{dateTo !== '' && `- ${dayjs(dateTo).format('ll')}`}
+							{dateTo !== '' && ` - ${dayjs(dateTo).format('ll')}`}
 						</p>
 					</div>
 				</SwipeWrapper>

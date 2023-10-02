@@ -1,13 +1,14 @@
 import React from 'react';
 import Employees from './components/employees/Employees';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 	return (
 		<div className="App">
 			<ToastContainer
 				position="bottom-center"
-				autoClose={3000}
+				autoClose={1500}
 				hideProgressBar={false}
 				newestOnTop={false}
 				closeOnClick

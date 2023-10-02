@@ -1,7 +1,6 @@
 import { useFormikContext } from 'formik';
 import { FC } from 'react';
 import { BsArrowRightShort } from 'react-icons/bs';
-import { Employee } from '../../components/employees/Employees.hooks';
 import DateInput from '../../components/ui-components/date-input/DateInput';
 import SelectInput from '../../components/ui-components/select-input/SelectInput';
 import TextInput from '../../components/ui-components/text-input/TextInput';
@@ -9,12 +8,10 @@ import { roleOptions } from '../../constants/employee';
 import { EmployeeFormType } from './types';
 
 type EmployeeFormProps = {
-	value: Employee;
-	onSubmit: (values: EmployeeFormType) => void;
 	close: () => void;
 };
 
-const EmployeeForm: FC<EmployeeFormProps> = ({ value, onSubmit, close }) => {
+const EmployeeForm: FC<EmployeeFormProps> = ({ close }) => {
 	const { resetForm } = useFormikContext<EmployeeFormType>();
 
 	const handleCancel = () => {

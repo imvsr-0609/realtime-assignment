@@ -1,14 +1,15 @@
-import { Formik, FormikHelpers, Form } from 'formik';
-import { FC, useEffect, useState } from 'react';
-import { defaultEmployee, dummyEmployees } from '../../constants/employee';
+import { Drawer } from '@mui/material';
+import { Form, Formik, FormikHelpers } from 'formik';
+import { FC, useCallback, useEffect, useState } from 'react';
+import uuid from 'react-uuid';
+import { defaultEmployee } from '../../constants/employee';
 import EmployeeForm from '../../forms/EmployeeForm/EmployeeForm';
 import { getInitialValue } from '../../forms/EmployeeForm/initialValue';
 import { EmployeeFormType } from '../../forms/EmployeeForm/types';
 import { EmployeeFormSchema } from '../../forms/EmployeeForm/validation';
 import { useIndexedDB } from '../../helpers/useIndexedDB';
-import EmployeeList from '../employee-list/EmployeeList';
 import { Employee } from './Employees.hooks';
-import { Drawer } from '@mui/material';
+import EmployeeList from './employee-list/EmployeeList';
 
 const Employees: FC = () => {
 	const [employees, setEmployees] = useState<Employee[]>([]);
@@ -28,19 +29,21 @@ const Employees: FC = () => {
 			setShowForm(open);
 		};
 
-	useEffect(() => {
+	const fetchEmployees = useCallback(() => {
 		getEmployees((employees) => setEmployees(employees));
-	}, []);
+	}, [getEmployees]);
 
-	const handleAddEmployee = (employee: Employee) => {
-		addEmployee(employee);
-	};
+	useEffect(() => {
+		fetchEmployees();
+	}, [fetchEmployees]);
 
 	const handleSubmit = (
 		values: EmployeeFormType,
 		helpers: FormikHelpers<EmployeeFormType>,
 	) => {
-		addEmployee(values);
+		const newEmployee = { ...values, id: uuid() };
+		console.log(newEmployee);
+		addEmployee(newEmployee);
 		helpers.setSubmitting(false);
 		setShowForm(false);
 	};
@@ -54,11 +57,7 @@ const Employees: FC = () => {
 					validationSchema={EmployeeFormSchema}
 				>
 					<Form>
-						<EmployeeForm
-							value={defaultEmployee}
-							onSubmit={handleAddEmployee}
-							close={() => setShowForm(false)}
-						/>
+						<EmployeeForm close={() => setShowForm(false)} />
 					</Form>
 				</Formik>
 			</Drawer>
@@ -71,7 +70,7 @@ const Employees: FC = () => {
 			<div className="header">
 				<h2 className="header_title">Employee List</h2>
 			</div>
-			<EmployeeList employees={dummyEmployees} />
+			<EmployeeList employees={employees} />
 		</div>
 	);
 };

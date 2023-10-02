@@ -2,12 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { Employee } from '../components/employees/Employees.hooks';
 import { toast } from 'react-toastify';
 
-export interface User {
-	id: string;
-	name: string;
-	email: string;
-}
-
 export enum Stores {
 	Employees = 'Employees',
 	Database = 'EmployeeDatabase',
@@ -49,7 +43,7 @@ export const useIndexedDB = () => {
 
 	useEffect(() => {
 		initialiseIndexedDB();
-	}, [initialiseIndexedDB]);
+	}, []);
 
 	const addEmployee = (data: Employee) => {
 		if (!db) return;
@@ -89,12 +83,12 @@ export const useIndexedDB = () => {
 		};
 	};
 
-	const updateEmployee = (key: number, updatedEmployee: Employee) => {
+	const updateEmployee = (updatedEmployee: Employee) => {
 		if (!db) return;
 
 		const transaction = db.transaction(storeName, 'readwrite');
 		const objectStore = transaction.objectStore(storeName);
-		const request = objectStore.put(updatedEmployee, key);
+		const request = objectStore.put(updatedEmployee);
 		request.onsuccess = () => {
 			toast.success('Employee updated successfully');
 		};
@@ -104,7 +98,7 @@ export const useIndexedDB = () => {
 		};
 	};
 
-	const deleteEmployee = (key: number) => {
+	const deleteEmployee = (key: string) => {
 		if (!db) return;
 		const transaction = db.transaction(storeName, 'readwrite');
 		const objectStore = transaction.objectStore(storeName);

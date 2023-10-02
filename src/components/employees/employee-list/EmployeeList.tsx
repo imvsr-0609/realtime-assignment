@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
-import { Employee } from '../employees/Employees.hooks';
+import { Employee } from '../Employees.hooks';
 import SingleEmployee from './SingleEmployee';
-import noEmployee from '../../assets/no-employee.svg';
+import noEmployee from '../../../assets/no-employee.svg';
 
 type EmployeeListProps = {
 	employees: Employee[];
@@ -24,7 +24,7 @@ const EmployeeList: FC<EmployeeListProps> = ({ employees }) => {
 				</div>
 			) : (
 				<>
-					{currentEmployees && (
+					{currentEmployees.length > 0 && (
 						<div className="employee_list">
 							<div className="employee_list_header">
 								<h2 className="list_header_title">Current employees</h2>
@@ -35,7 +35,7 @@ const EmployeeList: FC<EmployeeListProps> = ({ employees }) => {
 							))}
 						</div>
 					)}
-					{previousEmployees && (
+					{previousEmployees.length > 0 && (
 						<div className="employee_list">
 							<div className="employee_list_header">
 								<h2 className="list_header_title">Previous employees</h2>
