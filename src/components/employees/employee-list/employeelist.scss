@@ -2,8 +2,14 @@
 
 .employee_list_wrapper {
 	width: 100%;
+	max-width: 786px;
+	margin: 0 auto;
 	height: 100%;
 	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 
 	.no_employee {
 		display: grid;
@@ -43,6 +49,7 @@
 	display: flex;
 	justify-content: flex-end;
 	height: 105px;
+	cursor: pointer;
 
 	.single_employee {
 		position: absolute;
@@ -67,6 +74,9 @@
 			font-size: 12px;
 			color: $input-placeholder-color;
 		}
+		.delete-btn {
+			display: none;
+		}
 	}
 
 	.swipe-to-delete {
@@ -75,6 +85,7 @@
 
 		&.swiping {
 			transform: translateX(-10px);
+			cursor: grabbing;
 		}
 	}
 
@@ -86,5 +97,38 @@
 		background-color: #f34642; /* You can customize the background color */
 		color: white;
 		cursor: pointer;
+	}
+}
+
+@media (min-width: 786px) {
+	.employee_list_wrapper {
+		border: 2px solid $border-color;
+	}
+
+	.employee_swipe {
+		height: auto;
+		display: flex;
+		justify-content: flex-start;
+		position: none;
+
+		.single_employee {
+			height: 105px;
+			.delete-btn {
+				position: absolute;
+				right: 1rem;
+				top: 50%;
+				transform: translateY(-50%);
+				display: grid;
+				place-items: center;
+				background-color: #f34642; /* You can customize the background color */
+				color: white;
+				font-size: larger;
+				width: 50px;
+				height: 50px;
+			}
+		}
+		.delete-icon {
+			display: none;
+		}
 	}
 }

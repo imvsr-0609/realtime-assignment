@@ -70,7 +70,7 @@ const SingleEmployee: FC<SingleEmployeeProps> = ({ employeeData }) => {
 
 			<div className="employee_swipe">
 				<SwipeWrapper onDelete={() => handleDeleteEmployee(employeeData.id)}>
-					<div onClick={() => setShowForm(true)} className="single_employee ">
+					<div onClick={() => setShowForm(true)} className="single_employee">
 						<h2 className="employee_name">{name}</h2>
 						<p className="employee_role">{role}</p>
 						<p className="employee_date">
@@ -78,6 +78,12 @@ const SingleEmployee: FC<SingleEmployeeProps> = ({ employeeData }) => {
 							{dayjs(dateFrom).format('ll')}
 							{dateTo !== '' && ` - ${dayjs(dateTo).format('ll')}`}
 						</p>
+						<button
+							onClick={() => handleDeleteEmployee(employeeData.id)}
+							className="delete-btn"
+						>
+							<MdDelete />
+						</button>
 					</div>
 				</SwipeWrapper>
 				<div className="delete-icon">

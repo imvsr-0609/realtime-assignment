@@ -54,12 +54,15 @@
 		width: 100%;
 		font-size: 1rem;
 		border-bottom: 1px solid $border-color;
+		cursor: pointer;
 	}
 }
 
 .datepicker_wrapper {
 	padding: 4px;
 	width: 100vw;
+	max-width: 656px;
+	margin: 0 auto;
 
 	.datepicker_component {
 		background-color: white;
