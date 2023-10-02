@@ -6,6 +6,7 @@
 	margin: 0 auto;
 	height: 100%;
 	overflow-y: scroll;
+	padding-bottom: 6rem;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -106,7 +107,6 @@
 	}
 
 	.employee_swipe {
-		height: auto;
 		display: flex;
 		justify-content: flex-start;
 		position: none;
